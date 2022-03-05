@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<form id="login_form" onsubmit="return login();" class="loginForm">
+    <h2>Login</h2>
+    <div class="idForm">
+        <input type="text" class="id" name="uid" id="uid" placeholder="ID">
+    </div>
+    <div class="passForm">
+        <input type="password" class="pw" name="pwd" id="pwd" placeholder="PW">
+    </div>
+    <button type="submit" class="loginBtn">
+        LOG IN
+    </button>
+    <div class="bottomText">
+        Don't you have ID? <a href="/library/signup">sign up</a>
+    </div>
+</form>
+</body>
+<style>
+    .loginBtn{
+        all: unset;
+        background:#6F4E37;
+        padding-right : 10px;
+        padding-left : 10px;
+        color:#fff;
+        border:none;
+        position:relative;
+        height:30px;
+        font-size:1em;
+        cursor:pointer;
+        transition:800ms ease all;
+        outline:none;
+        width:90px;
+        text-align: center;
+        display: block;
+        margin: auto;
+    }
+</style>
+</html>

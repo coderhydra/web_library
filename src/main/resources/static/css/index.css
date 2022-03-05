@@ -1,0 +1,54 @@
+@charset "UTF-8";
+@charset "UTF-8";
+*{
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  font-family:sans-serif;
+}
+body {
+        height: 100vh;
+        background-image: url('/img/lighthouse.jpeg');
+        background-repeat : no-repeat;
+        background-size : cover;
+        background-color: black;
+}
+.loginForm {
+  position:absolute;
+  width:300px;
+  height:400px;
+  padding: 30px, 20px;
+  background-color:#FFFFFF;
+  opacity: 0.9;
+  text-align:center;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border-radius: 15px;
+}
+.loginForm h1{
+  margin :9px;
+  line-height: 150%;
+
+  text-align: center;
+}
+.loginForm h2{
+  margin :9px;
+  line-height: 150%;
+  border-radius: 15px;
+  background-color: #46649B;
+  color: white;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  text-align: center;
+}
+.loginForm h2:hover{
+  border-radius: 15px;
+  background-color: #B4B4FF;
+  color: white;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  text-align: center;
+  margin: 9px;
+}
+a{
+	  color: white;
+}
