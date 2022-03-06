@@ -25,44 +25,45 @@
 <th:block th:include="@{/fragments/footer}"></th:block>
 </body>
 <script type="text/javascript">
-    window.onload = function(){
+    window.onload = function () {
         $.ajax({
-            url:'/library/uid',
-            method:'get',
-            cache:false,
-            dataType:'text',
-            success:function(res){
-                if(res==""){
-                }else{
-                    $("#changing_form").html("<h5>"+res+"님 환영합니다.</h5><button class='loginBtn' onclick=logout();>로그아웃");
+            url: '/library/uid',
+            method: 'get',
+            cache: false,
+            dataType: 'text',
+            success: function (res) {
+                if (res == "") {
+                } else {
+                    $("#changing_form").html("<h5>" + res + "님 환영합니다.</h5><button class='loginBtn' onclick=logout();>로그아웃");
                 }
             },
-            error:function(xhr,status,err){
-                alert('에러:'+err);
+            error: function (xhr, status, err) {
+                alert('에러:' + err);
             }
         });
     }
+
     function login() {
-        var id= $("#uid").val();
-        var pw= $("#pwd").val();
-        if((id=='') || (pw=='')){
+        var id = $("#uid").val();
+        var pw = $("#pwd").val();
+        if ((id == '') || (pw == '')) {
             alert('아이디와 패스워드를 입력해주세요...\n ID=eeni \n PW=cat');
             return false;
         }
         var serData = $('#login_form').serialize();
         $.ajax({
-            url:'/library/login',
-            method:'post',
-            cache:false,
-            data:serData,
-            dataType:'json',
-            success:function(res){
-                alert(res.ok ? "로그인 성공": "로그인 실패");
+            url: '/library/login',
+            method: 'post',
+            cache: false,
+            data: serData,
+            dataType: 'json',
+            success: function (res) {
+                alert(res.ok ? "로그인 성공" : "로그인 실패");
                 //타임리프 문서로변경하고 싶으나 id를 넘겨줄방법
-                $("#changing_form").html("<h5>"+id+"님 환영합니다.</h5><button class='loginBtn' onclick=logout();>로그아웃");
+                $("#changing_form").html("<h5>" + id + "님 환영합니다.</h5><button class='loginBtn' onclick=logout();>로그아웃");
             },
-            error:function(xhr,status,err){
-                alert('에러:'+err);
+            error: function (xhr, status, err) {
+                alert('에러:' + err);
             }
         });
         return false;
@@ -71,42 +72,44 @@
     let interval;
     let activeIndex = 1;
 
-    $(document).ready(function(){
-        interval = setInterval(changeActiveIndex,2500);
-        $('.list-button-item').on('click',function(){
+    $(document).ready(function () {
+        interval = setInterval(changeActiveIndex, 2500);
+        $('.list-button-item').on('click', function () {
             // list button의 색상 변경
             const index = $(this).index();
             activeIndex = index;
             changeActiveIndex();
             clearInterval(interval);
             // animation 재설정을 위해 animation을 잠시 제거한다.
-            $('.banner').css('animation','none');
+            $('.banner').css('animation', 'none');
             // animation 재설정
-            $('.banner').animate({marginLeft:`${-100*index}%`},1,function(){
+            $('.banner').animate({marginLeft: `${-100 * index}%`}, 1, function () {
                 //1초의 시간 여유(해당 이미지로 이동하는 animation을 위한 시간)를 두고 다시 animation을 설정한다.
-                setTimeout(function(){
-                    $('.banner').css('animation',`animation${index+1} 10s infinite`)
+                setTimeout(function () {
+                    $('.banner').css('animation', `animation${index + 1} 10s infinite`)
 
-                    interval = setInterval(changeActiveIndex,2500);
+                    interval = setInterval(changeActiveIndex, 2500);
                 }, 1000)
             })
         })
     })
-    function changeActiveIndex(){
-        if(activeIndex>3) {
-            activeIndex%=4;
+
+    function changeActiveIndex() {
+        if (activeIndex > 3) {
+            activeIndex %= 4;
         }
         changeActiveBtn();
-        activeIndex+=1;
+        activeIndex += 1;
     }
-    function changeActiveBtn(){
+
+    function changeActiveBtn() {
         $('.list-button-item').removeClass('active');
         $(`.list-button span:eq(${activeIndex})`).addClass('active');
     }
 </script>
 <script src="/js/scripts.js"></script>
 <style>
-    .loginBox{
+    .loginBox {
         all: unset;
         width: 300px;
         margin: 0 auto;
@@ -123,16 +126,18 @@
         position: relative;
         background-color: white;
     }
-    .banner-container{
-        width:100vw;
-        height:300px;
-        overflow:hidden;
+
+    .banner-container {
+        width: 100vw;
+        height: 300px;
+        overflow: hidden;
     }
-    .banner{
+
+    .banner {
         all: unset;
-        width:calc(100vw*4);
-        height:100%;
-        display:flex;
+        width: calc(100vw * 4);
+        height: 100%;
+        display: flex;
         animation: animation1 10s infinite;
         /*기본 전환 animation을 위한 설정*/
         -webkit-transition: all 0.5s cubic-bezier(1, .01, .32, 1);
@@ -141,90 +146,170 @@
         -ms-transition: all 0.5s cubic-bezier(1, .01, .32, 1);
         transition: all 0.5s cubic-bezier(1, .01, .32, 1);
     }
-    .banner>div{
-        width:100vw;
-        height:100%;
+
+    .banner > div {
+        width: 100vw;
+        height: 100%;
     }
 
-    .list-button{
-        width:100%;
-        height:10px;
-        display:flex;
-        justify-content:center;
-        margin-top:-30px;
-        position:absolute;
-        z-index:2;
+    .list-button {
+        width: 100%;
+        height: 10px;
+        display: flex;
+        justify-content: center;
+        margin-top: -30px;
+        position: absolute;
+        z-index: 2;
     }
-    .list-button-item{
-        width:10px;
-        height:10px;
-        border-radius:5rem;
-        background-color:black;
+
+    .list-button-item {
+        width: 10px;
+        height: 10px;
+        border-radius: 5rem;
+        background-color: black;
         cursor: pointer;
         display: inline-block;
-        margin:6px;
+        margin: 6px;
     }
-    .list-button-item.active{
-        background-color:white;
+
+    .list-button-item.active {
+        background-color: white;
     }
+
     @keyframes animation1 {
-        0% {margin-left: 0}
-        20% {margin-left: 0}
-        25% {margin-left: -100%}
-        45% {margin-left: -100%}
-        50% {margin-left: -200%}
-        70% {margin-left: -200%}
-        75% {margin-left: -300%}
-        95% {margin-left: -300%}
-        100% {margin-left: 0}
+        0% {
+            margin-left: 0
+        }
+        20% {
+            margin-left: 0
+        }
+        25% {
+            margin-left: -100%
+        }
+        45% {
+            margin-left: -100%
+        }
+        50% {
+            margin-left: -200%
+        }
+        70% {
+            margin-left: -200%
+        }
+        75% {
+            margin-left: -300%
+        }
+        95% {
+            margin-left: -300%
+        }
+        100% {
+            margin-left: 0
+        }
     }
+
     @keyframes animation2 {
-        0% {margin-left: -100%}
-        20% {margin-left: -100%}
-        25% {margin-left: -200%}
-        45% {margin-left: -200%}
-        50% {margin-left: -300%}
-        70% {margin-left: -300%}
-        75% {margin-left: 0}
-        95% {margin-left: 0}
-        100% {margin-left: -100%}
+        0% {
+            margin-left: -100%
+        }
+        20% {
+            margin-left: -100%
+        }
+        25% {
+            margin-left: -200%
+        }
+        45% {
+            margin-left: -200%
+        }
+        50% {
+            margin-left: -300%
+        }
+        70% {
+            margin-left: -300%
+        }
+        75% {
+            margin-left: 0
+        }
+        95% {
+            margin-left: 0
+        }
+        100% {
+            margin-left: -100%
+        }
     }
+
     @keyframes animation3 {
-        0% {margin-left: -200%}
-        20% {margin-left: -200%}
-        25% {margin-left: -300%}
-        45% {margin-left: -300%}
-        50% {margin-left: 0}
-        70% {margin-left: 0}
-        75% {margin-left: -100%}
-        95% {margin-left: -100%}
-        100% {margin-left: -200%}
+        0% {
+            margin-left: -200%
+        }
+        20% {
+            margin-left: -200%
+        }
+        25% {
+            margin-left: -300%
+        }
+        45% {
+            margin-left: -300%
+        }
+        50% {
+            margin-left: 0
+        }
+        70% {
+            margin-left: 0
+        }
+        75% {
+            margin-left: -100%
+        }
+        95% {
+            margin-left: -100%
+        }
+        100% {
+            margin-left: -200%
+        }
     }
+
     @keyframes animation4 {
-        0% {margin-left: -300%}
-        20% {margin-left: -300%}
-        25% {margin-left: 0}
-        45% {margin-left: 0}
-        50% {margin-left: -100%}
-        70% {margin-left: -100%}
-        75% {margin-left: -200%}
-        95% {margin-left: -200%}
-        100% {margin-left: -300%}
+        0% {
+            margin-left: -300%
+        }
+        20% {
+            margin-left: -300%
+        }
+        25% {
+            margin-left: 0
+        }
+        45% {
+            margin-left: 0
+        }
+        50% {
+            margin-left: -100%
+        }
+        70% {
+            margin-left: -100%
+        }
+        75% {
+            margin-left: -200%
+        }
+        95% {
+            margin-left: -200%
+        }
+        100% {
+            margin-left: -300%
+        }
     }
-    .loginBtn{
+
+    .loginBtn {
         all: unset;
-        background:#6F4E37;
-        padding-right : 10px;
-        padding-left : 10px;
-        color:#fff;
-        border:none;
-        position:relative;
-        height:30px;
-        font-size:1em;
-        cursor:pointer;
-        transition:800ms ease all;
-        outline:none;
-        width:90px;
+        background: #6F4E37;
+        padding-right: 10px;
+        padding-left: 10px;
+        color: #fff;
+        border: none;
+        position: relative;
+        height: 30px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: 800ms ease all;
+        outline: none;
+        width: 90px;
         text-align: center;
         display: block;
         margin: auto;

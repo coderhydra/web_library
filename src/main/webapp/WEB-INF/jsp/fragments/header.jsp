@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +37,6 @@
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                                 <li><a class="dropdown-item" href="/library/board/free">희망도서 신청</a></li>
                                 <li><a class="dropdown-item" href="/library/board/free">책배달 서비스 신청</a></li>
-                                <li><a class="dropdown-item" href="/library/board/free">희망도서 신청</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="/library/board/FAQ">FAQ</a></li>
@@ -53,6 +54,9 @@
                 </div>
             </div>
         </nav>
+
+        <!-- Bootstrap core JS-->
+        <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>
     </main>
 </div>

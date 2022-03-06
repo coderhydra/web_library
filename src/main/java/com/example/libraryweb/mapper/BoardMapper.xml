@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.libraryweb.mapper.BoardMapper">
+    <select id="getBoardById"
+            resultType="com.example.libraryweb.vo.BoardVO"
+            parameterType="Integer">
+        SELECT id,title,content,writer,view_cnt,section,
+        secret_yn,delete_yn,insert_time,update_time,delete_time
+        FROM library_board
+        WHERE id = #{id}
+    </select>
+    <!-- 조회수  -->
+    <update id="boardCnt"
+            parameterType="Integer">
+        UPDATE library_board
+        SET view_cnt=view_cnt+1
+        WHERE id=#{id}
+    </update>
+
+    <select id="getBoardList"
+            parameterType="String"
+            resultType="com.example.libraryweb.vo.BoardVO">
+        SELECT id,title,content,writer,view_cnt,section,
+        secret_yn,delete_yn,insert_time,update_time,delete_time
+        FROM library_board
+        WHERE delete_yn = 'N'AND section=#{value}
+        <!-- 글 최신글로 뒤집기! -->
+        ORDER BY 1 DESC
+    </select>
+
+    <!--insert 요소는 resultType 속성이 없어도 생성된 행의 수(정수)가 리턴됨-->
+    <insert id="insertBoard"
+            parameterType="com.example.libraryweb.vo.BoardVO">
+        INSERT INTO user VALUES(#{title},#{content},#{writer},#{section})
+    </insert>
+
+    <!-- 한 행을 추가하고 자동증가필드의 값을 파라미터 객체의 num변수에 할당-->
+    <insert id="addAndGetKey" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.example.libraryweb.vo.BoardVO">
+        INSERT INTO library_board (title,content,writer,section) VALUES(#{title},#{content},#{writer},#{section})
+    </insert>
+
+    <!--update 요소는 resultType 속성이 없어도 변경된 행의 수(정수)가 리턴됨-->
+    <update id="updateBoard"
+            parameterType="com.example.libraryweb.vo.BoardVO">
+        UPDATE library_board
+        SET title=#{title}, content=#{content}
+        WHERE id=#{id}
+    </update>
+
+    <update id="deleteBoard"
+            parameterType="com.example.libraryweb.vo.BoardVO">
+        UPDATE library_board
+        SET delete_yn='Y', delete_time=now()
+        WHERE id=#{id}
+    </update>
+
+    <!--delete 요소는 resultType 속성이 없어도 변경된 행의 수(정수)가 리턴됨-->
+    <delete id="deleteB" parameterType="Integer">
+        DELETE FROM user WHERE num=#{num}
+    </delete>
+
+    <select id="findWithoutId"
+            resultType="com.example.libraryweb.vo.BoardVO"
+            parameterType="com.example.libraryweb.vo.BoardVO">
+        SELECT * FROM user
+        <where>
+            <if test="name != null">
+                name=#{name}
+            </if>
+            <if test="phone != null">
+                AND phone=#{phone}
+            </if>
+            <if test="email != null">
+                AND email=#{email}
+            </if>
+        </where>
+    </select>
+
+    <!-- 댓글 기능 -->
+    <insert id="insertComment"
+            parameterType="com.example.libraryweb.vo.CommentVO">
+        INSERT INTO library_comment VALUES(#{parent_id},Null,#{comment},#{writer},#{section},'N',now())
+    </insert>
+    <select id="getCommentList"
+            resultType="com.example.libraryweb.vo.CommentVO">
+        SELECT parent_id,id,comment,writer,section,delete_yn,time
+        FROM library_comment
+    </select>
+    <update id="updateComment"
+            parameterType="com.example.libraryweb.vo.CommentVO">
+        UPDATE library_comment
+        SET comment=#{comment}, time=now()
+        WHERE id=#{id}
+    </update>
+
+    <update id="deleteComment"
+            parameterType="Integer">
+        UPDATE library_comment
+        SET delete_yn='Y', time=now()
+        WHERE id=#{id}
+    </update>
+    <select id="getCommentById"
+            parameterType="Integer"
+            resultType="com.example.demo.vo.CommentVO">
+        SELECT parent_id,id,comment,writer,section,delete_yn,time
+        FROM library_comment
+        WHERE id=#{value}
+    </select>
+
+    <!--검색 기능 -->
+    <select id="getSearchTitle"
+            resultType="com.example.libraryweb.vo.BoardVO"
+            parameterType="com.example.libraryweb.vo.BoardVO">
+        SELECT * FROM library_board WHERE title LIKE CONCAT('%',#{title},'%')
+        AND delete_yn = 'N' AND section=#{section}
+        ORDER BY 1 DESC
+    </select>
+    <select id="getSearchContent"
+            resultType="com.example.libraryweb.vo.BoardVO"
+            parameterType="com.example.libraryweb.vo.BoardVO">
+        SELECT * FROM library_board WHERE content LIKE CONCAT('%',#{title},'%')
+        AND delete_yn = 'N'AND section=#{section}
+        ORDER BY 1 DESC
+    </select>
+    <select id="getSearchBoth"
+            resultType="com.example.libraryweb.vo.BoardVO"
+            parameterType="com.example.libraryweb.vo.BoardVO">
+        SELECT * FROM library_board WHERE (title LIKE CONCAT('%',#{title},'%')
+        OR content LIKE CONCAT('%',#{title},'%'))
+        AND delete_yn = 'N'AND section=#{section}
+        ORDER BY 1 DESC
+    </select>
+    <select id="getSearchWriter"
+            resultType="com.example.libraryweb.vo.BoardVO"
+            parameterType="com.example.libraryweb.vo.BoardVO">
+        SELECT * FROM library_board WHERE writer LIKE CONCAT('%',#{title},'%')
+        AND delete_yn = 'N' AND section=#{section}
+        ORDER BY 1 DESC
+    </select>
+
+    <insert id="UploadAndGetKey" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.example.libraryweb.vo.UploadVO">
+        INSERT INTO library_upload VALUES(NULL,#{uid},#{imageUrl},#{pid})
+    </insert>
+
+    <select id="getUploadImageUrl"
+            parameterType="Integer"
+            resultType="com.example.libraryweb.vo.UploadVO">
+        SELECT imageUrl
+        FROM library_upload
+        WHERE pid = #{value}
+    </select>
+
+</mapper>

@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class Cart {
 
-    private List<BookVO> list= new ArrayList<>();
+    private List<BookVO> list = new ArrayList<>();
 
     public boolean add(BookVO book) {
 //			list.add(book);
@@ -29,9 +29,9 @@ public class Cart {
     }
 
     public boolean delete(String isbn) {
-        for (int i = 0; i<list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             BookVO book = list.get(i);
-            if ( book.getIsbn().equals(isbn) ){
+            if (book.getIsbn().equals(isbn)) {
                 list.remove(i);
                 return true;
             }

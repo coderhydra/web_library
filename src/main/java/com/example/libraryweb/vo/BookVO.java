@@ -16,7 +16,9 @@ public class BookVO {
     private int reserve;
 
 
-    public BookVO() {}
+    public BookVO() {
+    }
+
     public BookVO(String isbn, String title, String author, String translator, String imageUrl, String publisher, String pubDate, String description, Long reviewCount, Object reviewRank, boolean rent, int reserve) {
         this.isbn = isbn;
         this.title = title;

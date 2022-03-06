@@ -8,20 +8,22 @@ body {
     height: 100%;
     background: #f5f6f7;
     background-image: url('/img/library.jpeg');
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
+    font-family: Dotum, '돋움', Helvetica, sans-serif;
 }
+
 .BOX {
-  position:absolute;
-  width:600px;
-  height:1330px;
-  padding: 90px, 20px;
-  background-color:#FFFFFF;
-  text-align:center;
-  top:100%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  border-radius: 15px;
+    position: absolute;
+    width: 600px;
+    height: 1330px;
+    padding: 90px, 20px;
+    background-color: #FFFFFF;
+    text-align: center;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
 }
+
 #logo {
     cursor: pointer;
 }
@@ -31,6 +33,7 @@ body {
     padding-bottom: 20px;
     text-align: center;
 }
+
 #wrapper {
     position: relative;
     height: 100%;
@@ -42,8 +45,6 @@ body {
     transform: translate(-50%);
     width: 460px;
 }
-
-
 
 
 /* 입력폼 */
@@ -82,7 +83,7 @@ h3 {
 }
 
 input {
-    font-family: Dotum,'돋움',Helvetica,sans-serif;    
+    font-family: Dotum, '돋움', Helvetica, sans-serif;
 }
 
 .box.int_id {
@@ -125,7 +126,7 @@ input {
 #bir_yy {
     display: table-cell;
     width: 147px;
-    
+
 }
 
 #bir_mm {
@@ -143,7 +144,10 @@ input {
     padding-left: 10px;
 }
 
-label{ padding-left:30px; padding-right:30px;}
+label {
+    padding-left: 30px;
+    padding-right: 30px;
+}
 
 select {
     width: 100%;
@@ -156,7 +160,7 @@ select {
     text-align: start;
     border: none;
     cursor: default;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
+    font-family: Dotum, '돋움', Helvetica, sans-serif;
 }
 
 /* 에러메세지 */
@@ -164,7 +168,7 @@ select {
 .error_next_box {
     margin-top: 9px;
     font-size: 12px;
-    color: red;    
+    color: red;
     display: none;
 }
 
@@ -192,5 +196,5 @@ select {
     background-color: #08a600;
     font-size: 20px;
     font-weight: 400;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
+    font-family: Dotum, '돋움', Helvetica, sans-serif;
 }

@@ -7,15 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class Cont {
 
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "redirect:/library/main";
     }
+
     @GetMapping("/jsp")
-    public String jsp(){
+    public String jsp() {
         return "jsp";
     }
+
     @GetMapping("/thymeleaf")
-    public String thymeleaf(){
+    public String thymeleaf() {
         return "thymeleaf/thymeleaf";
     }
 }

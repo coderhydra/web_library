@@ -29,10 +29,12 @@ public class LibraryCont {
     public String privacy() {
         return "thymeleaf/pages/privacy";
     }
+
     @GetMapping("/main")
     public String main() {
         return "thymeleaf/main";
     }
+
     @GetMapping("/login")
     public String loginG() {
         return "login";
@@ -41,16 +43,17 @@ public class LibraryCont {
     @PostMapping("/login")
     @ResponseBody
     public String loginP(
-            @RequestParam("uid")String uid,
-            @RequestParam("pwd")String pwd,
+            @RequestParam("uid") String uid,
+            @RequestParam("pwd") String pwd,
             Model m
     ) {
         boolean res = uSvc.login(uid, pwd);
-        m.addAttribute("uid",uid);
-        m.addAttribute("grade",uSvc.getGrade());
+        m.addAttribute("uid", uid);
+        m.addAttribute("grade", uSvc.getGrade());
         String jstr = String.format("{\"ok\":%b}", res);
         return jstr;
     }
+
     @PostMapping("/isLogin")
     @ResponseBody
     public boolean isLogin() {
